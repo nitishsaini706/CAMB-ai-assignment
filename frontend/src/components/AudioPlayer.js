@@ -19,7 +19,9 @@ const AudioPlayer = () => {
     const nextTrackIndex = trackIndex >= tracks.length - 1 ? 0 : trackIndex + 1;
     setTrackIndex(nextTrackIndex);
     setCurrentTrack(tracks[nextTrackIndex]);
+    progressBarRef.current.value = -1;
     setIsPlaying(false);
+    setTimeProgress(0);
   };
 
   return (
@@ -51,6 +53,8 @@ const AudioPlayer = () => {
               setTrackIndex,
               setCurrentTrack,
               handleNext,
+              setIsPlaying,
+              isPlaying
             }}
           /> 
           <ProgressBar

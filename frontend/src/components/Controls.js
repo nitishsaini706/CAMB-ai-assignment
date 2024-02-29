@@ -79,6 +79,9 @@ const Controls = ({
     const newTrackIndex = trackIndex === 0 ? tracks.length - 1 : trackIndex - 1;
     setTrackIndex(newTrackIndex);
     setCurrentTrack(tracks[newTrackIndex]);
+    progressBarRef.current.value = -1;
+    setIsPlaying(false);
+    setTimeProgress(0);
   };
 
   // Effect for volume control and muting
