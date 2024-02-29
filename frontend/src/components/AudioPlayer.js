@@ -10,6 +10,7 @@ const AudioPlayer = () => {
   const [currentTrack, setCurrentTrack] = useState(null);
   const [timeProgress, setTimeProgress] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   const audioRef = useRef();
   const progressBarRef = useRef();
@@ -18,6 +19,7 @@ const AudioPlayer = () => {
     const nextTrackIndex = trackIndex >= tracks.length - 1 ? 0 : trackIndex + 1;
     setTrackIndex(nextTrackIndex);
     setCurrentTrack(tracks[nextTrackIndex]);
+    setIsPlaying(false);
   };
 
   return (

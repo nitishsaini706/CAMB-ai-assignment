@@ -21,8 +21,10 @@ const Controls = ({
   setTrackIndex,
   setCurrentTrack,
   handleNext,
+  isPlaying,
+  setIsPlaying
 }) => {
-  const [isPlaying, setIsPlaying] = useState(false);
+  
   const [volume, setVolume] = useState(60);
   const [muteVolume, setMuteVolume] = useState(false);
 
