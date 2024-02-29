@@ -13,6 +13,7 @@ git clone https://github.com/nitishsaini706/CAMB-ai-assignment.git
 cd CAMB-ai-assignment
 cd frontend
 npm install
-npm run dev
+npm run start
 
 ```
+URL - https://camb-ai-assignment-5r6ngu43u-nitishsaini706s-projects.vercel.app/
