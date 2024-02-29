@@ -17,3 +17,5 @@ npm run start
 
 ```
 URL - https://camb-ai-assignment-5r6ngu43u-nitishsaini706s-projects.vercel.app/
+
+<img width="1450" alt="image" src="https://github.com/nitishsaini706/CAMB-ai-assignment/assets/39373956/6882b574-fccd-4cc7-abf8-4e604fd532e2">
