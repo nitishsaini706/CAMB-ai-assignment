@@ -1,116 +1,59 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import {
-  IoPlayBackSharp,
-  IoPlayForwardSharp,
-  IoPlaySkipBackSharp,
-  IoPlaySkipForwardSharp,
   IoPlaySharp,
   IoPauseSharp,
-  IoVolumeHigh,
-  IoVolumeOff,
-  IoVolumeLow,
 } from 'react-icons/io5';
 
 const Controls = ({
   audioRef,
-  progressBarRef,
-  duration,
+  startTime,
+  endTime,
   setTimeProgress,
-  tracks,
-  trackIndex,
-  setTrackIndex,
-  setCurrentTrack,
-  handleNext,
   isPlaying,
-  setIsPlaying
+  setIsPlaying,
+  currentTrack
 }) => {
   
-  const [volume, setVolume] = useState(60);
-  const [muteVolume, setMuteVolume] = useState(false);
 
   const togglePlayPause = useCallback(() => {
     setIsPlaying(prev => !prev);
+    console.log(audioRef)
   }, []);
 
 
   // Animation Frame Ref for smooth progress bar animation
-  const playAnimationRef = useRef();
-
-  // Function to update the progress bar and time
-  const repeat = useCallback(() => {
-    if (audioRef.current) {
-      const currentTime = audioRef.current.currentTime;
-      setTimeProgress(currentTime);
-      progressBarRef.current.value = currentTime;
-      progressBarRef.current.style.setProperty(
-        '--range-progress',
-        `${(currentTime / duration) * 100}%`
-      );
-      playAnimationRef.current = requestAnimationFrame(repeat);
-    }
-  }, [audioRef, duration, progressBarRef, setTimeProgress]);
+  // const playAnimationRef = useRef();
 
   // Effect to start or pause playback and initiate progress animation
-  useEffect(() => {
-    if (audioRef.current && isPlaying) {
-      const playPromise = audioRef.current.play();
-      if (playPromise !== undefined) {
-        playPromise.then(() => {
-          // Playback started
-        }).catch(error => {
-          console.error('Playback failed:', error);
-          setIsPlaying(false); // Handle error, possibly resetting state
-        });
-      }
-      playAnimationRef.current = requestAnimationFrame(repeat);
-    } else {
-      audioRef.current?.pause();
-      cancelAnimationFrame(playAnimationRef.current);
-    }
-  }, [isPlaying, audioRef, repeat]);
+  // useEffect(() => {
+  //   if (audioRef.current && isPlaying) {
+  //     console.log(audioRef)
+  //     playAnimationRef.current = requestAnimationFrame(audioRef.currentTime);
+  //     const playTimeout = setTimeout(() => {
+  //       audioRef.current.play();
+  //     }, startTime * 1000); // startTime in milliseconds
 
+  //     // Stop the audio at the designated end time
+  //     const stopTimeout = setTimeout(() => {
+  //       audioRef.current.pause();
+  //       cancelAnimationFrame(playAnimationRef.current);
+  //       audioRef.current.currentTime = 0;
+  //     }, endTime * 1000); // endTime in milliseconds
 
-  // Skip forward/backward 15 seconds
-  const skipForward = () => audioRef.current.currentTime += 15;
-  const skipBackward = () => audioRef.current.currentTime -= 15;
+  //     // Cleanup timeouts on unmount
+  //     return () => {
+  //       clearTimeout(playTimeout);
+  //       clearTimeout(stopTimeout);
+  //       audioRef.current.pause();
+  //     };
+  //   }
+  // }, [isPlaying, audioRef, startTime, endTime]);
 
-  // Handle track change to previous track
-  const handlePrevious = () => {
-    const newTrackIndex = trackIndex === 0 ? tracks.length - 1 : trackIndex - 1;
-    setTrackIndex(newTrackIndex);
-    setCurrentTrack(tracks[newTrackIndex]);
-    progressBarRef.current.value = -1;
-    setIsPlaying(false);
-    setTimeProgress(0);
-  };
-
-  // Effect for volume control and muting
-  useEffect(() => {
-    audioRef.current.volume = volume / 100;
-    audioRef.current.muted = muteVolume;
-  }, [volume, muteVolume, audioRef]);
 
   return (
     <div className="controls-wrapper">
       <div className="controls">
-        <button onClick={handlePrevious}><IoPlaySkipBackSharp /></button>
-        <button onClick={skipBackward}><IoPlayBackSharp /></button>
-        <button onClick={togglePlayPause}>{isPlaying ? <IoPauseSharp /> : <IoPlaySharp />}</button>
-        <button onClick={skipForward}><IoPlayForwardSharp /></button>
-        <button onClick={handleNext}><IoPlaySkipForwardSharp /></button>
-      </div>
-      <div className="volume">
-        <button onClick={() => setMuteVolume(prev => !prev)}>
-          {muteVolume || volume < 5 ? <IoVolumeOff /> : volume < 40 ? <IoVolumeLow /> : <IoVolumeHigh />}
-        </button>
-        <input
-          type="range"
-          min="0"
-          max="100"
-          value={volume}
-          onChange={(e) => setVolume(e.target.value)}
-          style={{ background: `linear-gradient(to right, #f50 ${volume}%, #ccc ${volume}%)` }}
-        />
+        <button style={{color:"white"}} onClick={togglePlayPause}>{isPlaying ? <IoPauseSharp /> : <IoPlaySharp />}</button>
       </div>
     </div>
   );

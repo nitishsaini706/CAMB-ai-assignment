@@ -8,20 +8,15 @@ body {
   display: flex;
   justify-content: center;
   height: 80vh;
-  margin: 50px;
-  padding: 20px;
+  margin: 20px;
   color: white;
 }
 
-.audio-player {
-  background: #c1b6bc;
-}
-
 .inner {
-  max-width: 1000px;
-  width: 600px;
+  max-width: 100%;
+  width: 100vw;
   margin: 0 auto;
-  padding: 20px;
+  
 }
 
 /* audio info */
@@ -61,7 +56,11 @@ body {
   background: #1e1e1e; 
 }
 .list-group{
-  overflow-y: scroll;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 1000px;
 }
 .audio-icon {
   font-size: 40px;
@@ -92,10 +91,7 @@ body {
   height: 100%;
   vertical-align: middle;
 }
-.listing{
-   background: white;
-   color: black;
-}
+
 /* controls */
 .controls-wrapper {
   display: flex;
@@ -125,6 +121,8 @@ button svg {
 }
 .main{
   display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .progress {
   display: flex;
@@ -132,20 +130,19 @@ button svg {
   gap: 10px;
   width: 100%;
   margin-top:10px;
-  border: 2px black solid;
   padding:10px;
   background: transparent;
 }
 
 /* time */
 .time {
-  color: #333;
-  font-size: 13px;
+  color: white;
+  font-size: 20px;
   line-height: 46px;
 }
 
 .time.current {
-  color: rgb(0, 0, 0);
+  color: white;
 }
 
 /* Top bar */
@@ -207,10 +204,34 @@ button svg {
 }
 
 li{
-  margin-top: 10px;
+  margin-right: 10px;
+  
   cursor: pointer;
 }
-
- .active {
-  margin-top: 10px !important
+.list-group-item:nth-child(n+1) {
+  border-radius: 20px ;
 }
+.progress{
+  font-size: larger;
+  color: white;
+}
+.listing-0 {
+  background-color:#6C7D47;
+  color: white;
+}
+
+.listing-1 {
+  background-color:#0E79B2;
+  color: white;
+}
+
+.listing-2 {
+  background-color:#BF1363;
+  color: white;
+}
+
+.listing-3 {
+  background-color:#F39237;
+  color: white;
+}
+
