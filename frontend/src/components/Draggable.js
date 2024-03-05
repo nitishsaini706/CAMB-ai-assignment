@@ -32,10 +32,10 @@ const Draggable = ({ track, onRemove, index, audioRefs }) => {
             const newStart = track.start + movementPercentage * (30 / 100);
             const newX = e.clientX - trackRef.current.offsetX;
             console.log(audioRefs)
-            if (audioRefs.current[index].current) {
-                audioRefs.current[index].current.currentTime += newStart
+            // if (audioRefs.current[index].current) {
+            //     audioRefs.current[index].current.currentTime += newStart
 
-            }
+            // }
             // track.current.duration -=newX;
             // Update the dragX state, and use onDrag to update the parent component if necessary
             setDragX(newX);
